@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="550dp"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_success"
+        android:layout_marginTop="-35dp"
+        android:background="@android:color/white"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/tv_success"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="60dp"
+            android:text="Please give us some love!!!"
+            android:textColor="@color/black_85"
+            android:textSize="35sp"/>
+
+        <LinearLayout
+            android:id="@+id/lnr_rate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_success"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp">
+
+            <ImageView
+                android:id="@+id/img_start_one"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/heart_inact"
+                android:padding="10dp"/>
+
+            <ImageView
+                android:id="@+id/img_start_two"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/heart_inact"
+                android:padding="5dp"/>
+
+            <ImageView
+                android:id="@+id/img_start_three"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/heart_inact"
+                android:padding="10dp"/>
+
+            <ImageView
+                android:id="@+id/img_start_four"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/heart_inact"
+                android:padding="10dp"/>
+
+            <ImageView
+                android:id="@+id/img_start_five"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/heart_inact"
+                android:padding="10dp"/>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/card_submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lnr_rate"
+            android:background="#82D1D8"
+            android:gravity="center"
+            android:textStyle="bold|italic"
+            android:text="Rate Us"
+            android:layout_marginTop="20dp"
+            android:textSize="40sp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:textColor="@android:color/white"/>
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/iv_success"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/heart_pop"
+        android:padding="20dp"
+        />
+</RelativeLayout>
