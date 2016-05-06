@@ -38,7 +38,7 @@ import static android.R.color.transparent;
 public class Share_Activity extends AppCompatActivity implements View.OnClickListener {
     ImageView img_vw_share, img_vw_add_pic;
     String get_file_name, get_file_title, get_file_duration;
-    TextView txt_week, txt_add_pic;
+    TextView txt_week, txt_add_pic,txt_title;
     RelativeLayout rel_add_image, rel_util_round, share_main;
     int Camera_Code = 100;
     int Gallery_Code = 200;
@@ -47,7 +47,7 @@ public class Share_Activity extends AppCompatActivity implements View.OnClickLis
     utils.RoundedImage profile_round_img;
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
-    String img_path_to_set;
+    String get_week;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +57,7 @@ public class Share_Activity extends AppCompatActivity implements View.OnClickLis
         get_file_name = getIntent().getStringExtra("file_name");
         get_file_title = getIntent().getStringExtra("file_title");
         get_file_duration = getIntent().getStringExtra("file_duration");
+        get_week = getIntent().getStringExtra("file_week");
 
         String[] separated = get_file_title.split(".mp3");
         get_file_title = separated[0];
@@ -77,9 +78,11 @@ public class Share_Activity extends AppCompatActivity implements View.OnClickLis
         rel_util_round = (RelativeLayout) findViewById(R.id.util_round);
         txt_week = (TextView) findViewById(R.id.txt_week);
         txt_add_pic = (TextView) findViewById(R.id.txt_add_pic);
+        txt_title = (TextView) findViewById(R.id.txt_title);
         profile_round_img = (utils.RoundedImage) findViewById(R.id.profile_img);
 
-        txt_week.setText(get_file_title + "( " + get_file_duration + " )");
+        txt_week.setText(get_week + " - " + get_file_duration );
+        txt_title.setText(get_file_title);
         pref_get_color = preferences.getString("color", "tur");
 
         method_set_color(pref_get_color);

@@ -129,10 +129,10 @@ public class Contact_Fragment extends Fragment_Custom implements View.OnClickLis
     public static void getOpenFacebookIntent(Context context) {
         try {
             context.getPackageManager().getPackageInfo("com.facebook.katana", 0);
-           Intent i =  new Intent(Intent.ACTION_VIEW, Uri.parse("fb://page/mybabysbeat"));
+           Intent i =  new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.facebook.com/plentouzapps1/?skip_nax_wizard=true"));
             context.startActivity(i);
         } catch (Exception e) {
-            Intent i =  new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/"));
+            Intent i =  new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.facebook.com/plentouzapps1/?skip_nax_wizard=true"));
             context.startActivity(i);
         }
 
@@ -142,9 +142,9 @@ public class Contact_Fragment extends Fragment_Custom implements View.OnClickLis
     private void opengmail(){
         Intent sendIntent = new Intent(Intent.ACTION_VIEW);
         sendIntent.setType("plain/text");
-        sendIntent.setData(Uri.parse("test@gmail.com"));
+        sendIntent.setData(Uri.parse("babyjoey@gmail.com"));
         sendIntent.setClassName("com.google.android.gm", "com.google.android.gm.ComposeActivityGmail");
-        sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[] { "test@gmail.com" });
+        sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[] { "babyjoey@gmail.com" });
         sendIntent.putExtra(Intent.EXTRA_SUBJECT, "My Baby's Beat - User queries - Android device"+"\n"+edt_query.getText().toString());
         startActivity(sendIntent);
     }

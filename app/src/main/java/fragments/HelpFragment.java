@@ -1,5 +1,6 @@
 package fragments;
 
+import android.annotation.TargetApi;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -301,6 +302,9 @@ public class HelpFragment extends Fragment_Custom implements View.OnClickListene
         TextView txt_dialog_two = (TextView)view.findViewById( R.id.txt_dialog_two);
         RelativeLayout btn_mom = (RelativeLayout)view.findViewById( R.id.btn_one_tur);
         RelativeLayout btn_baby = (RelativeLayout)view.findViewById( R.id.btn_two_pink);
+       final RelativeLayout rel_three_help = (RelativeLayout)view.findViewById( R.id.rel_three_help);
+       final RelativeLayout rel_two_help = (RelativeLayout)view.findViewById( R.id.rel_two_help);
+       final RelativeLayout rel_one_help = (RelativeLayout)view.findViewById( R.id.rel_one_help);
 
         lnr_three.setVisibility(View.GONE);
         txt_dialog_one.setText("Mom");
@@ -320,6 +324,7 @@ public class HelpFragment extends Fragment_Custom implements View.OnClickListene
 
 
         btn_baby.setOnClickListener(new View.OnClickListener() {
+            @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
             @Override
             public void onClick(View v) {
                 try{
@@ -327,12 +332,12 @@ public class HelpFragment extends Fragment_Custom implements View.OnClickListene
                     mp.release();
 //                    mp.reset();
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                        lnr_one.setBackgroundDrawable(getResources().getDrawable(R.drawable.selector_transparnt));
-                        lnr_two.setBackgroundDrawable(getResources().getDrawable(R.drawable.selector_transparnt));
+                        rel_one_help.setBackgroundDrawable(getResources().getDrawable(R.drawable.selector_transparnt));
+                        rel_two_help.setBackgroundDrawable(getResources().getDrawable(R.drawable.selector_transparnt));
                     }
                     else{
-                        lnr_one.setBackground(getResources().getDrawable(R.drawable.selector_transparnt));
-                        lnr_two.setBackgroundDrawable(getResources().getDrawable(R.drawable.selector_transparnt));
+                        rel_one_help.setBackground(getResources().getDrawable(R.drawable.selector_transparnt));
+                        rel_two_help.setBackgroundDrawable(getResources().getDrawable(R.drawable.selector_transparnt));
                     }
                 }catch(Exception ex){
                     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
@@ -340,18 +345,19 @@ public class HelpFragment extends Fragment_Custom implements View.OnClickListene
                     alertDialogBuilder.setMessage("Increase your volume to max to hear sound samples");
 
                     alertDialogBuilder.setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                        @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
                         @Override
                         public void onClick(DialogInterface arg0, int arg1) {
                             arg0.dismiss();
                             mp = MediaPlayer.create(getActivity(), R.raw.baby);
                             mp.start();
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                                lnr_one.setBackgroundDrawable(getResources().getDrawable(R.drawable.selector_transparnt));
-                                lnr_two.setBackgroundDrawable(getResources().getDrawable(R.drawable.selector_bg));
+                                rel_one_help.setBackgroundDrawable(getResources().getDrawable(R.drawable.selector_transparnt));
+                                rel_two_help.setBackgroundDrawable(getResources().getDrawable(R.drawable.selector_bg));
                             }
                             else{
-                                lnr_one.setBackground(getResources().getDrawable(R.drawable.selector_transparnt));
-                                lnr_two.setBackgroundDrawable(getResources().getDrawable(R.drawable.selector_bg));
+                                rel_one_help.setBackground(getResources().getDrawable(R.drawable.selector_transparnt));
+                                rel_two_help.setBackgroundDrawable(getResources().getDrawable(R.drawable.selector_bg));
                             }
                         }
                     });
@@ -366,18 +372,19 @@ public class HelpFragment extends Fragment_Custom implements View.OnClickListene
             }
         });
         btn_mom.setOnClickListener(new View.OnClickListener() {
+            @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
             @Override
             public void onClick(View v) {
                 try{
                     mp.stop();
                     mp.release();
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                        lnr_one.setBackgroundDrawable(getResources().getDrawable(R.drawable.selector_transparnt));
-                        lnr_two.setBackgroundDrawable(getResources().getDrawable(R.drawable.selector_transparnt));
+                        rel_one_help.setBackgroundDrawable(getResources().getDrawable(R.drawable.selector_transparnt));
+                        rel_two_help.setBackgroundDrawable(getResources().getDrawable(R.drawable.selector_transparnt));
                     }
                     else{
-                        lnr_one.setBackground(getResources().getDrawable(R.drawable.selector_transparnt));
-                        lnr_two.setBackgroundDrawable(getResources().getDrawable(R.drawable.selector_transparnt));
+                        rel_one_help.setBackground(getResources().getDrawable(R.drawable.selector_transparnt));
+                        rel_two_help.setBackgroundDrawable(getResources().getDrawable(R.drawable.selector_transparnt));
                     }
                 }catch(Exception ex){
                     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
@@ -391,12 +398,12 @@ public class HelpFragment extends Fragment_Custom implements View.OnClickListene
                             mp = MediaPlayer.create(getActivity(), R.raw.mom);
                             mp.start();
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                                lnr_one.setBackgroundDrawable(getResources().getDrawable(R.drawable.selector_bg));
-                                lnr_two.setBackgroundDrawable(getResources().getDrawable(R.drawable.selector_transparnt));
+                                rel_one_help.setBackgroundDrawable(getResources().getDrawable(R.drawable.selector_bg));
+                                rel_two_help.setBackgroundDrawable(getResources().getDrawable(R.drawable.selector_transparnt));
                             }
                             else{
-                                lnr_one.setBackground(getResources().getDrawable(R.drawable.selector_bg));
-                                lnr_two.setBackgroundDrawable(getResources().getDrawable(R.drawable.selector_transparnt));
+                                rel_one_help.setBackground(getResources().getDrawable(R.drawable.selector_bg));
+                                rel_two_help.setBackgroundDrawable(getResources().getDrawable(R.drawable.selector_transparnt));
                             }
                         }
                     });

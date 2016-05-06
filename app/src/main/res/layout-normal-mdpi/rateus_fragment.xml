@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:orientation="vertical"
-                android:id="@+id/rate_main"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/landing_one_bg">
+              android:orientation="vertical"
+              android:id="@+id/rate_main"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+    android:background="@drawable/landing_one_bg">
     <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="400dp"
+        android:layout_width="350dp"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="50dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginRight="30dp">
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginRight="20dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -35,17 +35,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:text="Please give us some love  ?"
+                    android:text="Please give us some love ?"
+                    android:textStyle="italic"
                     android:layout_gravity="center"
                     android:textColor="@color/black_85"
-                    android:layout_marginTop="10dp"
-                    android:textStyle="italic"
-                    android:textSize="27sp"/>
-                <!--<ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:background="@drawable/smiley"
-                    android:layout_gravity="center"/>-->
+                    android:textSize="24sp"/>
+
             </LinearLayout>
 
 
@@ -65,7 +60,7 @@
                     android:id="@+id/img_start_one"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:layout_margin="10dp"
+                    android:layout_margin="5dp"
                     android:background="@drawable/heart_inact"
                     android:padding="10dp"/>
 
@@ -73,7 +68,7 @@
                     android:id="@+id/img_start_two"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:layout_margin="10dp"
+                    android:layout_margin="5dp"
                     android:background="@drawable/heart_inact"
                     android:padding="5dp"/>
 
@@ -81,7 +76,7 @@
                     android:id="@+id/img_start_three"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:layout_margin="10dp"
+                    android:layout_margin="5dp"
                     android:background="@drawable/heart_inact"
                     android:padding="10dp"/>
 
@@ -89,7 +84,7 @@
                     android:id="@+id/img_start_four"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:layout_margin="10dp"
+                    android:layout_margin="5dp"
                     android:background="@drawable/heart_inact"
                     android:padding="10dp"/>
 
@@ -97,7 +92,7 @@
                     android:id="@+id/img_start_five"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:layout_margin="10dp"
+                    android:layout_margin="5dp"
                     android:background="@drawable/heart_inact"
                     android:padding="10dp"/>
             </LinearLayout>
@@ -111,7 +106,8 @@
                 android:gravity="center"
                 android:textStyle="bold|italic"
                 android:text="Rate Us"
-                android:textSize="26sp"
+                android:layout_marginTop="10dp"
+                android:textSize="23sp"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
                 android:textColor="@android:color/white"/>

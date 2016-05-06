@@ -1,6 +1,7 @@
 package fragments;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -83,6 +84,10 @@ public class Recording_fragment extends Fragment_Custom implements View.OnClickL
     String week_saved;
     Recording_adapter adapter;
     SwipeToDismissTouchListener<RecyclerViewAdapter> touchListener;
+    final int HOUR = 60*60*1000;
+    final int MINUTE = 60*1000;
+    final int SECOND = 1000;
+
     public Recording_fragment() {
     }
 
@@ -263,6 +268,7 @@ public class Recording_fragment extends Fragment_Custom implements View.OnClickL
 
 
     //////////////list populisation///////
+    @SuppressLint("DefaultLocale")
     private void getFilename() {
         filepath = Environment.getExternalStorageDirectory().getPath();
 //        final String mRcordFilePath = Environment.getExternalStorageDirectory() + "/BabyBeat/"+file_name+".wav";
@@ -298,8 +304,8 @@ public class Recording_fragment extends Fragment_Custom implements View.OnClickL
                 if (f.isFile()) {
                     file_title = f.getName();
                     list_file_name_full.add(file_title);
-                    if (file_title.contains("#")) {
-                        String[] separated = file_title.split("#");
+                    if (file_title.contains("-")) {
+                        String[] separated = file_title.split("-");
                         list_file_title.add(separated[0]);
                         Log.e(".wav week",separated[1]);
                         if(separated[1].contains(".wav")){
@@ -339,10 +345,24 @@ public class Recording_fragment extends Fragment_Custom implements View.OnClickL
                 try {
                     mp = MediaPlayer.create(getActivity(), Uri.parse(name_file));
                     duration = mp.getDuration();
-                    duration_to_add = String.format("%d:%d",
+                    duration_to_add = String.format("%d:%d:%d",TimeUnit.MILLISECONDS.toMinutes(duration),
                             TimeUnit.MILLISECONDS.toMinutes(duration),
                             TimeUnit.MILLISECONDS.toSeconds(duration) -
                                     TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(duration)));
+                    int durationHour = duration/HOUR;
+                    int durationMint = (duration%HOUR)/MINUTE;
+                    int durationSec = (duration%MINUTE)/SECOND;
+
+
+
+                    if(durationHour>0){
+                        duration_to_add = String.format("%02d:%02d:%02d",
+                                 durationHour,durationMint,durationSec);
+
+                    }else{
+                        duration_to_add =String.format("%02d:%02d",
+                                 durationMint,durationSec);
+                    }
 
                     list_file_duration.add(duration_to_add);
                 } catch (Exception ex) {

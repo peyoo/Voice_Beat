@@ -77,6 +77,7 @@ public class Recording_adapter extends RecyclerView.Adapter<Recording_adapter.Pe
                 i.putExtra("file_duration", list_file_duration.get(position));
                 i.putExtra("file_title", list_file_title.get(position));
                 i.putExtra("file_full_name", list_file_name_full.get(position));
+                i.putExtra("file_week", list_file_week_entered.get(position));
                 ctx.startActivity(i);
 
             }

@@ -1,9 +1,12 @@
 package fragments;
 
 import android.Manifest;
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -17,6 +20,7 @@ import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.media.audiofx.NoiseSuppressor;
 import android.media.audiofx.Visualizer;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -114,6 +118,8 @@ public class Home_Fragment extends Fragment_Custom implements View.OnClickListen
     private WavAudioRecorder mRecorder;
     private RecordingThread mRecordingThread;
     AudioManager am;
+    ImageView img_fav;
+     String record_file_name="";
 
     public Home_Fragment() {
     }
@@ -152,6 +158,7 @@ public class Home_Fragment extends Fragment_Custom implements View.OnClickListen
         txt_txp_to_rcrd = (TextView) view.findViewById(R.id.txt_txp_to_rcrd);
         home_main=(RelativeLayout)view.findViewById(R.id.home_main);
         rel_stop=(RelativeLayout)view.findViewById(R.id.rel_stop);
+        img_fav=(ImageView) view.findViewById(R.id.img_fav);
         myChronometer = (Chronometer)view.findViewById(R.id.chronometer);
 
         /*Typeface    tf = Typeface.createFromAsset(getActivity().getAssets(),
@@ -163,19 +170,18 @@ public class Home_Fragment extends Fragment_Custom implements View.OnClickListen
         rel_week.setVisibility(View.VISIBLE);
         txt_week.setVisibility(View.VISIBLE);
         String week_pref =  String.valueOf(preferences.getInt("week",0));
-        if(!week_pref.equals("0")){
+       /* if(!week_pref.equals("0")){
             txt_week.setText(String.valueOf(preferences.getInt("week",1)));
         }
         else{
             rel_week.setVisibility(View.GONE);
-        }
-
+        }*/
+        txt_week.setText(String.valueOf(preferences.getInt("week",0)));
 
         mRealtimeWaveformView = (WaveformView)view. findViewById(R.id.waveformView);
         mRecordingThread = new RecordingThread(new AudioDataReceivedListener() {
             @Override
             public void onAudioDataReceived(short[] data) {
-                Log.e("buf_main0",data.toString());
                 mRealtimeWaveformView.setSamples(data);
             }
         });
@@ -250,21 +256,15 @@ public class Home_Fragment extends Fragment_Custom implements View.OnClickListen
                             lnr_vw_visualisatn.setVisibility(View.VISIBLE);
                             showdialog_filename();
                         }
-
                     }
                     else{
                         lnr_vw_record.setVisibility(View.GONE);
                         lnr_vw_visualisatn.setVisibility(View.VISIBLE);
                         showdialog_filename();
                     }
-
-
                 }
-
-//                record();
-
-
                 break;
+
 
             case R.id.rel_stop:
                 myChronometer.setBase(SystemClock.elapsedRealtime());
@@ -274,13 +274,12 @@ public class Home_Fragment extends Fragment_Custom implements View.OnClickListen
                     lnr_vw_record.setVisibility(View.VISIBLE);
                     lnr_vw_visualisatn.setVisibility(View.GONE);
                     snackbar_method(view, "recording saved");
-
-
                 }catch (Exception ex){
                     lnr_vw_record.setVisibility(View.VISIBLE);
                     lnr_vw_visualisatn.setVisibility(View.GONE);
                 }
                 play=1;
+                method_play_now();
                 break;
 
 
@@ -304,8 +303,8 @@ public class Home_Fragment extends Fragment_Custom implements View.OnClickListen
                     fragmentTransaction.add(R.id.main_fragment, fragment);
                     fragmentTransaction.commit();
                 }
-
                 break;
+
 
             case R.id.fab_recordng:
                 if (lnr_vw_visualisatn.getVisibility() == View.VISIBLE) {
@@ -336,7 +335,6 @@ public class Home_Fragment extends Fragment_Custom implements View.OnClickListen
                 if (lnr_vw_visualisatn.getVisibility() == View.VISIBLE) {
                     if(play==0){
                         snackbar_method(view,"Stop recording first");
-
                     }else {
                         lnr_vw_record.setVisibility(View.GONE);
                         FragmentManager fragmentManager3 = getFragmentManager();
@@ -356,11 +354,7 @@ public class Home_Fragment extends Fragment_Custom implements View.OnClickListen
 
                 break;
         }
-
     }
-
-
-
 
 
     public void stopRecording() {
@@ -368,6 +362,7 @@ public class Home_Fragment extends Fragment_Custom implements View.OnClickListen
         mRecordingThread.stopRecording();
         mRecorder.stop();
         mRecorder.reset();
+        mRecorder.release();
     }
 
 
@@ -388,6 +383,12 @@ public class Home_Fragment extends Fragment_Custom implements View.OnClickListen
 
         final EditText edt_file_name = (EditText) dialog.findViewById(R.id.edt_recordng_name);
 
+        edt_file_name.requestFocus();
+       /* InputMethodManager inputMethodManager=(InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (inputMethodManager != null){
+            inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
+        }*/
+
 
         Button card_cancel = (Button) dialog.findViewById(R.id.card_cancel);
         Button card_ok = (Button) dialog.findViewById(R.id.card_ok);
@@ -401,8 +402,8 @@ public class Home_Fragment extends Fragment_Custom implements View.OnClickListen
                     file_name = edt_file_name.getText().toString().trim();
 
                     mRecorder = WavAudioRecorder.getInstanse();
-                   final String mRcordFilePath = Environment.getExternalStorageDirectory() + "/BabyBeat/"+file_name+"#"+String.valueOf(preferences.getInt("week",1))+".wav";
-                    mRecorder.setOutputFile(mRcordFilePath);
+                    record_file_name = Environment.getExternalStorageDirectory() + "/BabyBeat/"+file_name+"-"+String.valueOf(preferences.getInt("week",0))+".wav";
+                    mRecorder.setOutputFile(record_file_name);
 
                     if (WavAudioRecorder.State.INITIALIZING == mRecorder.getState()) {
                         mRecorder.prepare();
@@ -416,6 +417,7 @@ public class Home_Fragment extends Fragment_Custom implements View.OnClickListen
                     }
                     mRecordingThread.startRecording();
                     dialog.dismiss();
+
                 } else {
                     if(edt_file_name.getText().toString().length()>0){
                         snackbar_method(view,"Enter file name  atleast 4 digits");
@@ -534,6 +536,38 @@ public class Home_Fragment extends Fragment_Custom implements View.OnClickListen
     public void onResume() {
         super.onResume();
 //        MyApplication.getInstance().trackScreenView("Footer Fragment");
+    }
+
+
+    private void method_play_now(){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
+        alertDialogBuilder.setTitle("Recording Saved");
+        alertDialogBuilder.setMessage("Do you want to play this recording now?");
+
+        alertDialogBuilder.setPositiveButton("Play", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface arg0, int arg1) {
+                arg0.dismiss();
+                Intent intent = new Intent();
+                intent.setAction(android.content.Intent.ACTION_VIEW);
+                File file = new File(record_file_name);
+                intent.setDataAndType(Uri.fromFile(file), "audio");
+                ctx.startActivity(intent);
+                Toast.makeText(getActivity(),"You can listen to recording again in recording list",Toast.LENGTH_LONG).show();
+
+            }
+        });
+
+        alertDialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface arg0, int arg1) {
+                arg0.dismiss();
+            }
+        });
+
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
     }
 }
 

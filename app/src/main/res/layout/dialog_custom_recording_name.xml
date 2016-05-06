@@ -40,7 +40,7 @@
                 android:layout_gravity="center"
                 android:layout_margin="20dp"
                 android:background="@drawable/editext_bg"
-                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456790!@$%^*()=:;,}{[]\/"
+                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456790()=:;,}{[]\/"
                 android:hint="Name"
                 android:padding="8dp"
                 />
