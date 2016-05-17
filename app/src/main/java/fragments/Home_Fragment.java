@@ -96,6 +96,7 @@ public class Home_Fragment extends Fragment_Custom implements View.OnClickListen
     AudioManager am;
     ImageView img_fav;
      String record_file_name="";
+    public static String mode_="classic";
 
     public Home_Fragment() {
     }
@@ -198,9 +199,11 @@ public class Home_Fragment extends Fragment_Custom implements View.OnClickListen
             case R.id.img_vw_audio_mode:
                 if (image == 0) {
                     image = 1;
+                    mode_ = "synth";
                     img_vw_audio_mode.setBackgroundResource(R.drawable.synthesized);
                 } else {
                     image = 0;
+                    mode_ = "classic";
                     img_vw_audio_mode.setBackgroundResource(R.drawable.classic);
                 }
 

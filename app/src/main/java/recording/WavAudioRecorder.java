@@ -9,6 +9,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 
+import fragments.Home_Fragment;
+
 /**
  * Created by Umesh on 4/20/2016.
  */
@@ -141,7 +143,15 @@ public class WavAudioRecorder {
             aFormat = audioFormat;
 
             mPeriodInFrames = sampleRate * TIMER_INTERVAL / 1000;		//?
-            mBufferSize = mPeriodInFrames * 2  * nChannels * mBitsPersample * 10;		//?
+            if(Home_Fragment.mode_.equals("classic")){
+                Log.e("mode","classic");
+                mBufferSize = mPeriodInFrames * 2  * nChannels * mBitsPersample * 5;
+            }
+            else{
+                Log.e("mode","synth");
+                mBufferSize = mPeriodInFrames * 2  * nChannels * mBitsPersample * 10;
+            }
+           	//?
             if (mBufferSize < AudioRecord.getMinBufferSize(sampleRate, channelConfig, audioFormat)) {
                 // Check to make sure buffer size is not smaller than the smallest allowed one
                 mBufferSize = AudioRecord.getMinBufferSize(sampleRate, channelConfig, audioFormat);

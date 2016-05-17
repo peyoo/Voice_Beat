@@ -99,15 +99,11 @@ short[] buf= new short[]{100,2000,3000,400,507,700,800};
             short[] shortArray = new short[size];
 
             for (int index = 0; index < size; index++)
-                shortArray[index] = (short) ((short) WavAudioRecorder.buffer[index]*10);
+                shortArray[index] = (short) ((short) WavAudioRecorder.buffer[index]*30);
             short[] shorts = new short[WavAudioRecorder.buffer.length/2];
 // to turn bytes to shorts as either big endian or little endian.
             ByteBuffer.wrap(WavAudioRecorder.buffer).order(ByteOrder.LITTLE_ENDIAN).asShortBuffer().get(shorts);
 
-            for(int i : shortArray){
-//                Log.e("buff",i+"");
-
-            }
             mListener.onAudioDataReceived(shorts);
         }
 

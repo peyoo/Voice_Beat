@@ -2,6 +2,7 @@ package fragments;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -45,6 +46,7 @@ import com.hudomju.swipe.adapter.RecyclerViewAdapter;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.concurrent.TimeUnit;
 
 import adapter.Recording_adapter;
@@ -371,6 +373,12 @@ public class Recording_fragment extends Fragment_Custom implements View.OnClickL
                 }
             }
 
+            Collections.reverse(list_file);
+            Collections.reverse(list_file_title);
+            Collections.reverse(list_file_duration);
+            Collections.reverse(list_file_week_entered);
+            Collections.reverse(list_file_name_full);
+
         }
 
 
@@ -391,7 +399,6 @@ public class Recording_fragment extends Fragment_Custom implements View.OnClickL
     public void onPause() {
         super.onPause();
         play = 0;
-
     }
 
 
@@ -464,6 +471,7 @@ public class Recording_fragment extends Fragment_Custom implements View.OnClickL
                 builder.setMessage("Please grant location access so this app can detect ble devices.");
                 builder.setPositiveButton("Ok", null);
                 builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
                     @Override
                     public void onDismiss(DialogInterface dialogInterface) {
                         requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
@@ -473,6 +481,7 @@ public class Recording_fragment extends Fragment_Custom implements View.OnClickL
             }
             else{
                 getFilename();
+
                 adapter = new Recording_adapter(list_file, list_file_title, list_file_duration, list_file_week_entered,list_file_name_full);
                 recycle_vw_recordng.setAdapter(adapter);
                 init_swipe();
