@@ -29,6 +29,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.flurry.android.FlurryAgent;
 import com.kennyc.bottomsheet.BottomSheet;
 import com.kennyc.bottomsheet.BottomSheetListener;
 
@@ -476,5 +477,18 @@ public class HelpFragment extends Fragment_Custom implements View.OnClickListene
         }
     }
 
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        FlurryAgent.onStartSession(getActivity());
+        FlurryAgent.logEvent("Help fragment");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        FlurryAgent.onEndSession(getActivity());
+    }
 
 }

@@ -18,6 +18,8 @@ import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.flurry.android.FlurryAgent;
+
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 
@@ -161,6 +163,25 @@ public class SplashActivity extends AppCompatActivity{
                 return;
             }
         }
+    }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        // starts a new session
+        FlurryAgent.onStartSession(this);
+        FlurryAgent.logEvent("Splash fragment");
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        // ends current session
+        FlurryAgent.onEndSession(this);
     }
 
 }

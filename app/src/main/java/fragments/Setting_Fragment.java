@@ -26,6 +26,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.flurry.android.FlurryAgent;
+
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 
@@ -413,4 +415,17 @@ public class Setting_Fragment extends Fragment_Custom implements View.OnClickLis
         snackbar.show();
     }
 
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        FlurryAgent.onStartSession(getActivity());
+        FlurryAgent.logEvent("Setting fragment");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        FlurryAgent.onEndSession(getActivity());
+    }
 }

@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.flurry.android.FlurryAgent;
 import com.kennyc.bottomsheet.BottomSheet;
 import com.special.ResideMenu.ResideMenu;
 import com.special.ResideMenu.ResideMenuItem;
@@ -164,5 +165,23 @@ public class MenuActivity extends FragmentActivity implements View.OnClickListen
             }, 2000);
         }
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        // starts a new session
+        FlurryAgent.onStartSession(this);
+        FlurryAgent.logEvent("Menu fragment");
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        // ends current session
+        FlurryAgent.onEndSession(this);
     }
 }

@@ -37,6 +37,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.flurry.android.FlurryAgent;
 import com.hudomju.swipe.OnItemClickListener;
 import com.hudomju.swipe.SwipeToDismissTouchListener;
 import com.hudomju.swipe.SwipeableItemClickListener;
@@ -514,5 +515,18 @@ public class Recording_fragment extends Fragment_Custom implements View.OnClickL
                 return;
             }
         }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        FlurryAgent.onStartSession(getActivity());
+        FlurryAgent.logEvent("Recording fragment");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        FlurryAgent.onEndSession(getActivity());
     }
 }

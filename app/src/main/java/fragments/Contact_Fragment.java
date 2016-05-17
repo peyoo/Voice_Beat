@@ -20,6 +20,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.flurry.android.FlurryAgent;
+
 import appsmaven.graph.com.voice_beat.R;
 
 
@@ -166,5 +168,18 @@ public class Contact_Fragment extends Fragment_Custom implements View.OnClickLis
         TextView textView2 = (TextView) sbView2.findViewById(android.support.design.R.id.snackbar_text);
         textView2.setTextColor(Color.YELLOW);
         snackbar.show();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        FlurryAgent.onStartSession(getActivity());
+        FlurryAgent.logEvent("Contact fragment");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        FlurryAgent.onEndSession(getActivity());
     }
 }

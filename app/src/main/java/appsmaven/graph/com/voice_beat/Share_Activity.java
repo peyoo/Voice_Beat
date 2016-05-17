@@ -24,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.flurry.android.FlurryAgent;
 import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
@@ -278,5 +279,24 @@ public class Share_Activity extends AppCompatActivity implements View.OnClickLis
         Uri newuri = res.insert(sArtworkUri, values);
     }
 
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        // starts a new session
+        FlurryAgent.onStartSession(this);
+        FlurryAgent.logEvent("Share fragment");
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        // ends current session
+        FlurryAgent.onEndSession(this);
+    }
 
 }

@@ -25,6 +25,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.flurry.android.FlurryAgent;
+
 import appsmaven.graph.com.voice_beat.R;
 
 public class RateUs_Fragment extends Fragment_Custom implements View.OnClickListener {
@@ -384,5 +386,18 @@ public class RateUs_Fragment extends Fragment_Custom implements View.OnClickList
 
 
         }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        FlurryAgent.onStartSession(getActivity());
+        FlurryAgent.logEvent("Rateus fragment");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        FlurryAgent.onEndSession(getActivity());
     }
 }

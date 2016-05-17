@@ -14,6 +14,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import com.flurry.android.FlurryAgent;
+
 import appsmaven.graph.com.voice_beat.R;
 import appsmaven.graph.com.voice_beat.VideoActivity;
 
@@ -78,10 +80,15 @@ public class Info_Fragment extends Fragment_Custom {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-       /* Intent i=new Intent(getActivity(), VideoActivity.class);
-        startActivity(i);
-        getActivity().finish();*/
+    public void onStart() {
+        super.onStart();
+        FlurryAgent.onStartSession(getActivity());
+        FlurryAgent.logEvent("Info fragment");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        FlurryAgent.onEndSession(getActivity());
     }
 }
